@@ -21,7 +21,7 @@ export default class Keyboard {
       'textarea',
       'text',
       null,
-      main,
+      wrapper,
       ['cols', 50],
       ['rows', 5],
       ['placeholder', 'Type something here...'],
@@ -33,14 +33,13 @@ export default class Keyboard {
       'language',
       lang,
     ]);
-    document.body.append(wrapper);
+    document.body.append(main);
+    main.append(wrapper);
     return this;
   }
 
   makeButtons() {
     this.keyButtons = [];
-    // eslint-disable-next-line no-console
-    console.log(this.rows);
     this.rows.forEach((element, index) => {
       const rowButton = create('div', 'row-button', null, this.container, [
         'number',

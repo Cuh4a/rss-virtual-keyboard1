@@ -1,6 +1,125 @@
+@import '../../node_modules/normalize.css/normalize.css';
+
+/* press-start-2p-regular - latin */
+@font-face {
+    font-family: 'Press Start 2P';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../assets/fonts/press-start-2p-v14-latin-regular.eot');
+    src: local(''), url('../assets/fonts/press-start-2p-v14-latin-regular.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/press-start-2p-v14-latin-regular.woff2') format('woff2'),
+        url('../assets/fonts/press-start-2p-v14-latin-regular.woff') format('woff'),
+        url('../assets/fonts/press-start-2p-v14-latin-regular.ttf') format('truetype'),
+        url('../assets/fonts/press-start-2p-v14-latin-regular.svg#PressStart2P') format('svg');
+}
+
+/* oswald-regular - latin */
+@font-face {
+    font-family: 'Oswald';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../assets/fonts/oswald-v47-latin-regular.eot');
+    src: local(''), url('../assets/fonts/oswald-v47-latin-regular.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/oswald-v47-latin-regular.woff2') format('woff2'),
+        url('../assets/fonts/oswald-v47-latin-regular.woff') format('woff'),
+        url('../assets/fonts/oswald-v47-latin-regular.ttf') format('truetype'),
+        url('../assets/fonts/oswald-v47-latin-regular.svg#Oswald') format('svg');
+}
+
+/* oswald-regular - cyrillic */
+@font-face {
+    font-family: 'Oswald';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../assets/fonts/oswald-v47-cyrillic-regular.eot');
+    src: local(''), url('../assets/fonts/oswald-v47-cyrillic-regular.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/oswald-v47-cyrillic-regular.woff2') format('woff2'),
+        url('../assets/fonts/oswald-v47-cyrillic-regular.woff') format('woff'),
+        url('../assets/fonts/oswald-v47-cyrillic-regular.ttf') format('truetype'),
+        url('../assets/fonts/oswald-v47-cyrillic-regular.svg#Oswald') format('svg');
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    height: 100%;
+    user-select: none;
+}
+
 body {
     background-color: rgb(2, 0, 36);
     background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(48, 110, 184, 1) 65%, rgba(104, 209, 231, 1) 100%);
+    font-family: 'Oswald', sans-serif;
+    height: 100vh;
+}
+
+.wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 26px;
+    text-align: center;
+}
+
+.text {
+    width: 90%;
+    max-width: 700px;
+    height: 250px;
+    margin: 10px auto 20px;
+    padding: 11px;
+    resize: none;
+    overflow: auto;
+    font-size: 18px;
+    color: rgb(66, 66, 66);
+    background-color: rgba(255, 255, 255, 0.6);
+    outline: none;
+    -moz-appearance: none;
+    &:focus {
+        border: 1px solid rgb(200, 230, 255);
+        box-shadow: 0 0 20px #719ece;
+        padding: 10px;
+    }
+    &::placeholder {
+        color: #999;
+    }
+}
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgb(200, 230, 255);
+    border-radius: 5px;
+    box-shadow: 0px 0 10px #719ece;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.row-button {
+    display: flex;
+    margin: 5px;
+}
+
+.key {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgb(200, 230, 255);
+    border-radius: 5px;
+    margin: 3px;
 }
