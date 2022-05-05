@@ -211,7 +211,7 @@ export default [
   },
   {
     code: 'ShiftLeft',
-    low: 'ShiftLeft',
+    low: 'Shift',
     up: null,
   },
   {
