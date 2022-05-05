@@ -50,6 +50,15 @@ export default class Keyboard {
         const button = new Key(buttonObj);
         this.keyButtons.push(button);
         rowButton.append(button.div);
+        if (button.code.match(/Backspace|CapsLock|ShiftLeft/)) {
+          button.div.style.width = '100px';
+        } else if (button.code.match(/Space/)) {
+          button.div.style.width = '330px';
+        } else if (button.code.match(/Enter|ShiftRight/)) {
+          button.div.style.width = '86px';
+        } else if (button.code.match(/Tab|Del/)) {
+          button.div.style.width = '47px';
+        }
       });
     });
   }

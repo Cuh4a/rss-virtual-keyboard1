@@ -266,57 +266,57 @@ export default [
   },
   {
     code: 'ArrowUp',
-    low: 'ArrowUp',
+    low: '▲',
     up: null,
   },
   {
     code: 'ShiftRight',
-    low: 'ShiftRight',
+    low: 'Shift',
     up: null,
   },
   {
     code: 'CtrlLeft',
-    low: 'CtrlLeft',
+    low: 'Ctrl',
     up: null,
   },
   {
     code: 'Win',
-    low: 'Win',
+    low: '❤',
     up: null,
   },
   {
     code: 'AltLeft',
-    low: 'AltLeft',
+    low: 'Alt',
     up: null,
   },
   {
     code: 'Space',
-    low: 'Space',
+    low: '',
     up: null,
   },
   {
     code: 'AltRight',
-    low: 'AltRight',
+    low: 'Alt',
     up: null,
   },
   {
     code: 'ArrowLeft',
-    low: 'ArrowLeft',
+    low: '◀',
     up: null,
   },
   {
     code: 'ArrowDown',
-    low: 'ArrowDown',
+    low: '▼',
     up: null,
   },
   {
     code: 'ArrowRight',
-    low: 'ArrowRight',
+    low: '►',
     up: null,
   },
   {
     code: 'CtrlRight',
-    low: 'CtrlRight',
+    low: 'Ctrl',
     up: null,
   },
 ];
