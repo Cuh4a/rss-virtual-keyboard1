@@ -11,12 +11,8 @@ export default class Key {
         /Tab|CapsLock|Shift|Ctrl|Win|Alt|Space|Backspace|Del|Enter|arr/,
       ),
     );
-    if (!up.match(/[A-ZА-ЯЁ]/)) {
-      this.extra = create('div', 'extra', this.up);
-    } else {
-      this.extra = create('div', 'extra', '');
-    }
-    this.letter = create('div', 'letter', low);
+    this.extra = create('div', 'extra', this.up);
+    this.letter = create('div', 'letter', this.low);
     this.div = create('div', 'key', [this.extra, this.letter], null, [
       'code',
       this.code,

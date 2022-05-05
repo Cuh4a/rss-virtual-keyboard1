@@ -144,4 +144,179 @@ export default [
     low: 'Del',
     up: null,
   },
+  {
+    code: 'CapsLock',
+    low: 'CapsLock',
+    up: null,
+  },
+  {
+    code: 'KeyA',
+    low: 'a',
+    up: 'A',
+  },
+  {
+    code: 'KeyS',
+    low: 's',
+    up: 'S',
+  },
+  {
+    code: 'KeyD',
+    low: 'd',
+    up: 'D',
+  },
+  {
+    code: 'KeyF',
+    low: 'f',
+    up: 'F',
+  },
+  {
+    code: 'KeyG',
+    low: 'g',
+    up: 'G',
+  },
+  {
+    code: 'KeyH',
+    low: 'h',
+    up: 'H',
+  },
+  {
+    code: 'KeyJ',
+    low: 'j',
+    up: 'J',
+  },
+  {
+    code: 'KeyK',
+    low: 'k',
+    up: 'K',
+  },
+  {
+    code: 'KeyL',
+    low: 'l',
+    up: 'L',
+  },
+  {
+    code: 'Semicolon',
+    low: ';',
+    up: ':',
+  },
+  {
+    code: 'Quote',
+    low: "'",
+    up: '"',
+  },
+  {
+    code: 'Enter',
+    low: 'Enter',
+    up: null,
+  },
+  {
+    code: 'ShiftLeft',
+    low: 'ShiftLeft',
+    up: null,
+  },
+  {
+    code: 'KeyZ',
+    low: 'z',
+    up: 'Z',
+  },
+  {
+    code: 'KeyX',
+    low: 'x',
+    up: 'X',
+  },
+  {
+    code: 'KeyC',
+    low: 'c',
+    up: 'C',
+  },
+  {
+    code: 'KeyV',
+    low: 'v',
+    up: 'V',
+  },
+  {
+    code: 'KeyB',
+    low: 'b',
+    up: 'B',
+  },
+  {
+    code: 'KeyN',
+    low: 'n',
+    up: 'N',
+  },
+  {
+    code: 'KeyM',
+    low: 'm',
+    up: 'M',
+  },
+  {
+    code: 'Comma',
+    low: ',',
+    up: '<',
+  },
+  {
+    code: 'Period',
+    low: '.',
+    up: '>',
+  },
+  {
+    code: 'Slash',
+    low: '/',
+    up: '?',
+  },
+  {
+    code: 'ArrowUp',
+    low: 'ArrowUp',
+    up: null,
+  },
+  {
+    code: 'ShiftRight',
+    low: 'ShiftRight',
+    up: null,
+  },
+  {
+    code: 'CtrlLeft',
+    low: 'CtrlLeft',
+    up: null,
+  },
+  {
+    code: 'Win',
+    low: 'Win',
+    up: null,
+  },
+  {
+    code: 'AltLeft',
+    low: 'AltLeft',
+    up: null,
+  },
+  {
+    code: 'Space',
+    low: 'Space',
+    up: null,
+  },
+  {
+    code: 'AltRight',
+    low: 'AltRight',
+    up: null,
+  },
+  {
+    code: 'ArrowLeft',
+    low: 'ArrowLeft',
+    up: null,
+  },
+  {
+    code: 'ArrowDown',
+    low: 'ArrowDown',
+    up: null,
+  },
+  {
+    code: 'ArrowRight',
+    low: 'ArrowRight',
+    up: null,
+  },
+  {
+    code: 'CtrlRight',
+    low: 'CtrlRight',
+    up: null,
+  },
 ];

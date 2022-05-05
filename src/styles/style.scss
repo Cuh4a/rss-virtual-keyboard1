@@ -1,3 +1,6 @@
 body {
-    background-color: yellowgreen;
+    background-color: rgb(2, 0, 36);
+    background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(48, 110, 184, 1) 65%, rgba(104, 209, 231, 1) 100%);
+    display: flex;
+    justify-content: center;
 }

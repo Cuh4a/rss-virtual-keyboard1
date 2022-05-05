@@ -4,7 +4,8 @@ import language from './languages/lang.js';
 import Key from './Key.js';
 // import { get } from './localStorage.js';
 
-const main = create('main', 'main', [
+const main = create('main', 'main');
+const wrapper = create('div', 'wrapper', [
   create('h1', 'title', 'Virtual Keyboard'),
 ]);
 
@@ -28,15 +29,23 @@ export default class Keyboard {
       ['spellcheck', false],
       ['autofocus', true],
     );
-    this.container = create('div', 'keyboard', null, main, ['language', lang]);
-    document.body.prepend(main);
+    this.container = create('div', 'keyboard', null, wrapper, [
+      'language',
+      lang,
+    ]);
+    document.body.append(wrapper);
     return this;
   }
 
   makeButtons() {
     this.keyButtons = [];
-    this.rows.forEach((element) => {
-      const rowButton = create('div', 'row-button', null, this.container);
+    // eslint-disable-next-line no-console
+    console.log(this.rows);
+    this.rows.forEach((element, index) => {
+      const rowButton = create('div', 'row-button', null, this.container, [
+        'number',
+        index + 1,
+      ]);
       element.forEach((e) => {
         const buttonObj = this.buttonsAll.find((key) => key.code === e);
         const button = new Key(buttonObj);

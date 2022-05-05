@@ -77,17 +77,10 @@ const rows = [
     'ArrowLeft',
     'ArrowDown',
     'ArrowRight',
-    'Ctrl',
+    'CtrlRight',
   ],
 ];
 
 const lang = get('lang', '"en"');
 
 new Keyboard(rows).init(lang).makeButtons();
-
-const textar = document.querySelector('.text');
-// eslint-disable-next-line no-unused-vars
-function logi(e) {
-  textar.textContent += ` ${e.code}`;
-}
-textar.addEventListener('keydown', logi);
