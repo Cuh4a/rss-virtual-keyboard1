@@ -1,0 +1,93 @@
+/* eslint-disable import/extensions */
+import '../styles/style.scss';
+
+import { get } from './localStorage.js';
+import Keyboard from './Keyboard.js';
+
+const rows = [
+  [
+    'Backquote',
+    'Digit1',
+    'Digit2',
+    'Digit3',
+    'Digit4',
+    'Digit5',
+    'Digit6',
+    'Digit7',
+    'Digit8',
+    'Digit9',
+    'Digit0',
+    'Minus',
+    'Equal',
+    'Backspace',
+  ],
+  [
+    'Tab',
+    'KeyQ',
+    'KeyE',
+    'KeyW',
+    'KeyR',
+    'KeyT',
+    'KeyY',
+    'KeyU',
+    'KeyI',
+    'KeyO',
+    'KeyP',
+    'BracketLeft',
+    'BracketRight',
+    'Backslash',
+    'Del',
+  ],
+  [
+    'CapsLock',
+    'KeyA',
+    'KeyS',
+    'KeyD',
+    'KeyF',
+    'KeyG',
+    'KeyH',
+    'KeyJ',
+    'KeyK',
+    'KeyL',
+    'Semicolon',
+    'Quote',
+    'Enter',
+  ],
+  [
+    'ShiftLeft',
+    'KeyZ',
+    'KeyX',
+    'KeyC',
+    'KeyV',
+    'KeyB',
+    'KeyN',
+    'KeyM',
+    'Comma',
+    'Period',
+    'Slash',
+    'ArrowUp',
+    'ShiftRight',
+  ],
+  [
+    'CtrlLeft',
+    'Win',
+    'AltLeft',
+    'Space',
+    'AltRight',
+    'ArrowLeft',
+    'ArrowDown',
+    'ArrowRight',
+    'Ctrl',
+  ],
+];
+
+const lang = get('lang', '"en"');
+
+new Keyboard(rows).init(lang).makeButtons();
+
+const textar = document.querySelector('.text');
+// eslint-disable-next-line no-unused-vars
+function logi(e) {
+  textar.textContent += ` ${e.code}`;
+}
+textar.addEventListener('keydown', logi);
