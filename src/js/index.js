@@ -24,8 +24,8 @@ const rows = [
   [
     'Tab',
     'KeyQ',
-    'KeyE',
     'KeyW',
+    'KeyE',
     'KeyR',
     'KeyT',
     'KeyY',
@@ -81,6 +81,6 @@ const rows = [
   ],
 ];
 
-const lang = get('lang', '"en"');
+const lang = get('lang', '"ru"');
 
 new Keyboard(rows).init(lang).makeButtons();
