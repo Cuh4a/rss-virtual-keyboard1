@@ -1,6 +1,7 @@
 import create from './utils/create';
 import language from './languages/lang';
 import Key from './Key';
+import * as storage from './localStorage';
 
 const main = create('main', 'main');
 const wrapper = create('div', 'wrapper', [
@@ -37,6 +38,7 @@ export default class Keyboard {
   }
 
   makeButtons() {
+    this.counter = 1;
     this.keyButtons = [];
     this.rows.forEach((element, index) => {
       const rowButton = create('div', 'row-button', null, this.container, [
@@ -67,6 +69,7 @@ export default class Keyboard {
     const { code, type } = e;
     if (e.stopPropogation) e.stopPropogation();
     const actualButton = this.keyButtons.find((key) => key.code === code);
+    this.text.focus();
     if (actualButton === undefined) {
       return;
     }
@@ -78,6 +81,11 @@ export default class Keyboard {
         actualButton.div.style.boxShadow = '0px 0 10px #719ece';
         actualButton.div.style.border = '3px solid rgb(200, 230, 255)';
       }
+      if (code.match(/Control/)) this.isCtrl = true;
+      if (code.match(/Shift/)) this.isShift = true;
+
+      if (code.match(/Control/) && this.isShift) this.languageChange();
+      if (code.match(/Shift/) && this.isCtrl) this.languageChange();
     } else if (type.match(/keyup/)) {
       actualButton.div.classList.remove('active');
       if (e.code.match(/Control|ShiftLeft|CapsLock|Tab|Backquote/)) {
@@ -89,6 +97,26 @@ export default class Keyboard {
         actualButton.div.style.boxShadow = '0px 0 3px #719ece';
         actualButton.div.style.border = '1px solid rgb(200, 230, 255)';
       }
+      if (code.match(/Control/)) {
+        this.counter = 1;
+        this.isCtrl = false;
+      }
+      if (code.match(/Shift/)) {
+        this.counter = 1;
+        this.isShift = false;
+      }
+    }
+  };
+
+  languageChange = () => {
+    if (this.container.dataset.language === 'en' && this.counter === 1) {
+      this.counter += 1;
+      this.container.dataset.language = 'ru';
+      storage.set('lang', this.container.dataset.language);
+    } else if (this.container.dataset.language === 'ru' && this.counter === 1) {
+      this.counter += 1;
+      this.container.dataset.language = 'en';
+      storage.set('lang', this.container.dataset.language);
     }
   };
 }
