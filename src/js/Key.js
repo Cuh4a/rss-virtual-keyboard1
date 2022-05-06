@@ -1,5 +1,4 @@
-/* eslint-disable import/extensions */
-import create from './utils/create.js';
+import create from './utils/create';
 
 export default class Key {
   constructor({ code, low, up }) {
@@ -7,9 +6,7 @@ export default class Key {
     this.low = low;
     this.up = up;
     this.isFnKey = Boolean(
-      low.match(
-        /Tab|CapsLock|Shift|Ctrl|Win|Alt|Space|Backspace|Del|Enter|arr/,
-      ),
+      low.match(/Tab|CapsLock|Shift|Ctrl|Win|Alt|Backspace|Del|Enter|arr/),
     );
     this.extra = create('div', 'extra hidden', this.up);
     this.letter = create('div', 'letter', this.low);

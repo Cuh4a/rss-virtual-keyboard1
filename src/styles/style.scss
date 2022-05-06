@@ -134,7 +134,7 @@ body {
     background-color: rgba(0, 0, 0, 0.171);
     color: #fff;
 
-    &[data-code='Win'],
+    &[data-code='MetaLeft'],
     &[data-code='ArrowDown'] {
         background-color: rgb(245, 132, 198);
     }
@@ -146,35 +146,18 @@ body {
     &[data-code='Tab'],
     &[data-code='CapsLock'],
     &[data-code='ShiftLeft'],
-    &[data-code='CtrlLeft'],
+    &[data-code='ControlLeft'],
     &[data-code='AltLeft'],
     &[data-code='Space'],
     &[data-code='Backspace'],
-    &[data-code='Del'],
+    &[data-code='Delete'],
     &[data-code='Enter'],
     &[data-code='ShiftRight'],
     &[data-code='AltRight'],
-    &[data-code='CtrlRight'] {
+    &[data-code='ControlRight'] {
         background-color: rgba(33, 89, 156, 0.4);
     }
-    &:hover,
-    &[data-code='Tab']:hover,
-    &[data-code='CapsLock']:hover,
-    &[data-code='ShiftLeft']:hover,
-    &[data-code='CtrlLeft']:hover,
-    &[data-code='AltLeft']:hover,
-    &[data-code='Space']:hover,
-    &[data-code='Backspace']:hover,
-    &[data-code='Del']:hover,
-    &[data-code='Enter']:hover,
-    &[data-code='ShiftRight']:hover,
-    &[data-code='AltRight']:hover,
-    &[data-code='CtrlRight']:hover,
-    &[data-code='Win']:hover,
-    &[data-code='ArrowDown']:hover,
-    &[data-code='ArrowLeft']:hover,
-    &[data-code='ArrowRight']:hover,
-    &[data-code='ArrowUp']:hover {
+    &:hover {
         background-color: rgba(173, 157, 86, 0.9);
         box-shadow: 0px 0 10px #719ece;
     }
@@ -182,20 +165,26 @@ body {
     &[data-code='Tab']:active,
     &[data-code='CapsLock']:active,
     &[data-code='ShiftLeft']:active,
-    &[data-code='CtrlLeft']:active,
+    &[data-code='ControlLeft']:active,
     &[data-code='AltLeft']:active,
     &[data-code='Space']:active,
     &[data-code='Backspace']:active,
-    &[data-code='Del']:active,
+    &[data-code='Delete']:active,
     &[data-code='Enter']:active,
     &[data-code='ShiftRight']:active,
     &[data-code='AltRight']:active,
-    &[data-code='CtrlRight']:active,
+    &[data-code='ControlRight']:active,
     &[data-code='Win']:active,
     &[data-code='ArrowDown']:active,
     &[data-code='ArrowLeft']:active,
     &[data-code='ArrowRight']:active,
     &[data-code='ArrowUp']:active {
+        background-color: rgb(196, 176, 86);
+        box-shadow: 0px 0 10px #719ece;
+        border: 3px solid rgb(200, 230, 255);
+        transition: 0.1s;
+    }
+    & + .active {
         background-color: rgb(196, 176, 86);
         box-shadow: 0px 0 10px #719ece;
         border: 3px solid rgb(200, 230, 255);

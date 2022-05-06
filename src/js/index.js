@@ -1,8 +1,7 @@
-/* eslint-disable import/extensions */
 import '../styles/style.scss';
 
-import { get } from './localStorage.js';
-import Keyboard from './Keyboard.js';
+import { get } from './localStorage';
+import Keyboard from './Keyboard';
 
 const rows = [
   [
@@ -36,7 +35,7 @@ const rows = [
     'BracketLeft',
     'BracketRight',
     'Backslash',
-    'Del',
+    'Delete',
   ],
   [
     'CapsLock',
@@ -69,18 +68,18 @@ const rows = [
     'ShiftRight',
   ],
   [
-    'CtrlLeft',
-    'Win',
+    'ControlLeft',
+    'MetaLeft',
     'AltLeft',
     'Space',
     'AltRight',
     'ArrowLeft',
     'ArrowDown',
     'ArrowRight',
-    'CtrlRight',
+    'ControlRight',
   ],
 ];
 
-const lang = get('lang', '"ru"');
+const lang = get('lang', '"en"');
 
 new Keyboard(rows).init(lang).makeButtons();

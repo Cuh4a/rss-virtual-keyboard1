@@ -140,7 +140,7 @@ export default [
     up: '|',
   },
   {
-    code: 'Del',
+    code: 'Delete',
     low: 'Del',
     up: null,
   },
@@ -275,12 +275,12 @@ export default [
     up: null,
   },
   {
-    code: 'CtrlLeft',
+    code: 'ControlLeft',
     low: 'Ctrl',
     up: null,
   },
   {
-    code: 'Win',
+    code: 'MetaLeft',
     low: '❤',
     up: null,
   },
@@ -315,7 +315,7 @@ export default [
     up: null,
   },
   {
-    code: 'CtrlRight',
+    code: 'ControlRight',
     low: 'Ctrl',
     up: null,
   },

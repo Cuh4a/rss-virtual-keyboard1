@@ -1,8 +1,6 @@
-/* eslint-disable import/extensions */
-import create from './utils/create.js';
-import language from './languages/lang.js';
-import Key from './Key.js';
-// import { get } from './localStorage.js';
+import create from './utils/create';
+import language from './languages/lang';
+import Key from './Key';
 
 const main = create('main', 'main');
 const wrapper = create('div', 'wrapper', [
@@ -61,5 +59,36 @@ export default class Keyboard {
         }
       });
     });
+    document.onkeydown = this.handle;
+    document.onkeyup = this.handle;
   }
+
+  handle = (e) => {
+    const { code, type } = e;
+    if (e.stopPropogation) e.stopPropogation();
+    const actualButton = this.keyButtons.find((key) => key.code === code);
+    if (actualButton === undefined) {
+      return;
+    }
+    if (type.match(/keydown/)) {
+      e.preventDefault();
+      actualButton.div.classList.add('active');
+      if (e.code.match(/Control|ShiftLeft|CapsLock|Tab|Backquote|MetaLeft/)) {
+        actualButton.div.style.backgroundColor = 'rgb(196, 176, 86)';
+        actualButton.div.style.boxShadow = '0px 0 10px #719ece';
+        actualButton.div.style.border = '3px solid rgb(200, 230, 255)';
+      }
+    } else if (type.match(/keyup/)) {
+      actualButton.div.classList.remove('active');
+      if (e.code.match(/Control|ShiftLeft|CapsLock|Tab|Backquote/)) {
+        actualButton.div.style.backgroundColor = 'rgba(33, 89, 156, 0.4)';
+        actualButton.div.style.boxShadow = '0px 0 3px #719ece';
+        actualButton.div.style.border = '1px solid rgb(200, 230, 255)';
+      } else if (e.code.match(/MetaLeft/)) {
+        actualButton.div.style.backgroundColor = 'rgb(245, 132, 198)';
+        actualButton.div.style.boxShadow = '0px 0 3px #719ece';
+        actualButton.div.style.border = '1px solid rgb(200, 230, 255)';
+      }
+    }
+  };
 }
