@@ -123,6 +123,29 @@ export default class Keyboard {
           this.lettersUp();
         }
       }
+
+      if (!this.isCapsLock) {
+        this.printText(
+          actualButton,
+          this.isShift ? actualButton.up : actualButton.low,
+        );
+      } else if (this.isCapsLock) {
+        if (this.isShift) {
+          this.printText(
+            actualButton,
+            actualButton.low.match(/[a-zа-я]/)
+              ? actualButton.low
+              : actualButton.up,
+          );
+        } else {
+          this.printText(
+            actualButton,
+            !actualButton.isFnKey && actualButton.low.match(/[a-zа-я]/)
+              ? actualButton.up
+              : actualButton.low,
+          );
+        }
+      }
     } else if (type.match(/keyup|mouseup/)) {
       actualButton.div.classList.remove('active');
       if (code.match(/Control/)) {
@@ -223,4 +246,83 @@ export default class Keyboard {
       }
     }
   };
+
+  printText(actualButton, char) {
+    let cursorPosition = this.text.selectionStart;
+    const left = this.text.value.slice(0, cursorPosition);
+    const right = this.text.value.slice(cursorPosition);
+
+    const buttonsFunctional = {
+      Space: () => {
+        this.text.value = `${left} ${right}`;
+        cursorPosition += 1;
+      },
+      Backspace: () => {
+        this.text.value = `${left.slice(0, -1)}${right}`;
+        if (cursorPosition === 0) {
+          cursorPosition = 0;
+        } else {
+          cursorPosition -= 1;
+        }
+      },
+      Delete: () => {
+        this.text.value = `${left}${right.slice(1)}`;
+      },
+      Tab: () => {
+        this.text.value = `${left}\t${right}`;
+        cursorPosition += 1;
+      },
+      Enter: () => {
+        this.text.value = `${left}\n${right}`;
+        cursorPosition += 1;
+      },
+      ArrowRight: () => {
+        cursorPosition += 1;
+      },
+      ArrowLeft: () => {
+        if (cursorPosition === 0) {
+          cursorPosition = 0;
+        } else {
+          cursorPosition -= 1;
+        }
+      },
+      ArrowUp: () => {
+        const charsFromLeft = this.text.value.slice(0, cursorPosition);
+        const cars = [];
+        for (let i = 0; i < charsFromLeft.length; i += 1) {
+          if (charsFromLeft[i] === '\n') {
+            cars.push(i);
+          }
+        }
+        if (cars.length > 1) {
+          cursorPosition = cars[1] + 0;
+        } else {
+          cursorPosition = cars[0] + 0;
+        }
+      },
+      ArrowDown: () => {
+        const charsFromRight = this.text.value.slice(cursorPosition);
+        const cars = [];
+        for (let i = 0; i < charsFromRight.length; i += 1) {
+          if (charsFromRight[i] === '\n') {
+            cars.push(i);
+          }
+        }
+        if (cars.length > 1) {
+          cursorPosition += cars[1];
+        } else {
+          cursorPosition += charsFromRight.length;
+        }
+      },
+    };
+
+    if (buttonsFunctional[actualButton.code]) {
+      buttonsFunctional[actualButton.code]();
+    }
+    if (!actualButton.isFnKey) {
+      cursorPosition += 1;
+      this.text.value = `${left}${char}${right}`;
+    }
+    this.text.setSelectionRange(cursorPosition, cursorPosition);
+  }
 }
