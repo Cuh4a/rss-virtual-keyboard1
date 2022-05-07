@@ -68,6 +68,15 @@ export default class Keyboard {
         } else if (button.code.match(/Tab|Del/)) {
           button.div.style.width = '47px';
         }
+        if (button.isFnKey) {
+          button.div.classList.add('fn');
+        }
+        if (button.code.match(/MetaLeft|ArrowDown/)) {
+          button.div.classList.add('pink');
+        }
+        if (button.code.match(/ArrowLeft|ArrowUp|ArrowRight/)) {
+          button.div.classList.add('blue');
+        }
       });
     });
     document.onkeydown = this.handle;
@@ -85,11 +94,7 @@ export default class Keyboard {
     if (type.match(/keydown/)) {
       e.preventDefault();
       actualButton.div.classList.add('active');
-      if (e.code.match(/Control|ShiftLeft|CapsLock|Tab|Backquote|MetaLeft/)) {
-        actualButton.div.style.backgroundColor = 'rgb(196, 176, 86)';
-        actualButton.div.style.boxShadow = '0px 0 10px #719ece';
-        actualButton.div.style.border = '3px solid rgb(200, 230, 255)';
-      }
+
       if (code.match(/Control/)) this.isCtrl = true;
       if (code.match(/Shift/)) this.isShift = true;
 
@@ -97,15 +102,6 @@ export default class Keyboard {
       if (code.match(/Shift/) && this.isCtrl) this.languageChange();
     } else if (type.match(/keyup/)) {
       actualButton.div.classList.remove('active');
-      if (e.code.match(/Control|ShiftLeft|CapsLock|Tab|Backquote/)) {
-        actualButton.div.style.backgroundColor = 'rgba(33, 89, 156, 0.4)';
-        actualButton.div.style.boxShadow = '0px 0 3px #719ece';
-        actualButton.div.style.border = '1px solid rgb(200, 230, 255)';
-      } else if (e.code.match(/MetaLeft/)) {
-        actualButton.div.style.backgroundColor = 'rgb(245, 132, 198)';
-        actualButton.div.style.boxShadow = '0px 0 3px #719ece';
-        actualButton.div.style.border = '1px solid rgb(200, 230, 255)';
-      }
       if (code.match(/Control/)) {
         this.counter = 1;
         this.isCtrl = false;
