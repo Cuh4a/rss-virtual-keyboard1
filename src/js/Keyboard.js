@@ -82,13 +82,34 @@ export default class Keyboard {
     });
     document.onkeydown = this.handle;
     document.onkeyup = this.handle;
-    document.onmousedown = this.handle;
-    document.onmouseup = this.handle;
+    this.container.onmousedown = this.mouseHandle;
+    this.container.onmouseup = this.mouseHandle;
   }
+
+  mouseHandle = (e) => {
+    e.stopPropagation();
+    const element = e.target.closest('.key');
+    if (!element) return;
+    const {
+      dataset: { code },
+    } = element;
+    element.onmouseleave = this.removeActive;
+    this.handle({ code, type: e.type });
+  };
+
+  removeActive = ({
+    target: {
+      dataset: { code },
+    },
+  }) => {
+    const actualButton = this.keyButtons.find((key) => key.code === code);
+    if (!actualButton.code.match(/Shift|Control|CapsLock/))
+      actualButton.div.classList.remove('active');
+  };
 
   handle = (e) => {
     const { code, type } = e;
-    if (e.stopPropogation) e.stopPropogation();
+    if (e.stopPropagation) e.stopPropagation();
     const actualButton = this.keyButtons.find((key) => key.code === code);
     this.text.focus();
     if (actualButton === undefined) {
@@ -133,14 +154,14 @@ export default class Keyboard {
         if (this.isShift) {
           this.printText(
             actualButton,
-            actualButton.low.match(/[a-zа-я]/)
+            actualButton.low.match(/[a-zа-я]|ё/)
               ? actualButton.low
               : actualButton.up,
           );
         } else {
           this.printText(
             actualButton,
-            !actualButton.isFnKey && actualButton.low.match(/[a-zа-я]/)
+            !actualButton.isFnKey && actualButton.low.match(/[a-zа-я]|ё/)
               ? actualButton.up
               : actualButton.low,
           );
