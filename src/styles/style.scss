@@ -64,6 +64,8 @@ body {
     font-family: 'Oswald', sans-serif;
     height: 100vh;
     width: 100vw;
+    display: flex;
+    justify-content: center;
 }
 
 .wrapper {
@@ -71,7 +73,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 800px;
 }
 
 .title {
@@ -200,4 +202,20 @@ body {
 .extra {
     height: 100%;
     line-height: 37px;
+}
+
+.os {
+    align-self: center;
+    margin: 30px;
+    color: #fff;
+    font-size: 23px;
+    //font-family: 'Press Start 2P', sans-serif;
+}
+
+.hint {
+    align-self: flex-start;
+    margin: 12px 0 0 50px;
+    color: #fff;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 11px;
 }

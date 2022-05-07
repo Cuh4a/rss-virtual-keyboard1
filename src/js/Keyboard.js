@@ -34,6 +34,15 @@ export default class Keyboard {
     ]);
     document.body.append(main);
     main.append(wrapper);
+    const hint = create(
+      'span',
+      'hint',
+      'Use Shift + Ctrl to switch language',
+      wrapper,
+    );
+    wrapper.append(hint);
+    const os = create('h2', 'os', 'Keyboard was created in Windows', wrapper);
+    wrapper.append(os);
     return this;
   }
 
@@ -113,10 +122,19 @@ export default class Keyboard {
       this.counter += 1;
       this.container.dataset.language = 'ru';
       storage.set('lang', this.container.dataset.language);
+      this.buttonsAll = language.ru;
     } else if (this.container.dataset.language === 'ru' && this.counter === 1) {
       this.counter += 1;
       this.container.dataset.language = 'en';
       storage.set('lang', this.container.dataset.language);
+      this.buttonsAll = language.en;
     }
+    this.keyButtons.forEach((e) => {
+      const newLangButton = this.buttonsAll.find((key) => key.code === e.code);
+      e.low = newLangButton.low;
+      e.letter.innerHTML = newLangButton.low;
+      e.up = newLangButton.up;
+      e.extra.innerHTML = newLangButton.up;
+    });
   };
 }
