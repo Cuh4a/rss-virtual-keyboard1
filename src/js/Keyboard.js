@@ -37,7 +37,7 @@ export default class Keyboard {
     const hint = create(
       'span',
       'hint',
-      'Use Shift + Ctrl to switch language',
+      'Use Ctrl + Alt to switch language',
       wrapper,
     );
     wrapper.append(hint);
@@ -48,6 +48,7 @@ export default class Keyboard {
 
   makeButtons() {
     this.counter = 1;
+    this.capsLockCounter = 0;
     this.keyButtons = [];
     this.rows.forEach((element, index) => {
       const rowButton = create('div', 'row-button', null, this.container, [
@@ -81,6 +82,8 @@ export default class Keyboard {
     });
     document.onkeydown = this.handle;
     document.onkeyup = this.handle;
+    document.onmousedown = this.handle;
+    document.onmouseup = this.handle;
   }
 
   handle = (e) => {
@@ -91,24 +94,57 @@ export default class Keyboard {
     if (actualButton === undefined) {
       return;
     }
-    if (type.match(/keydown/)) {
-      e.preventDefault();
+    if (type.match(/keydown|mousedown/)) {
+      if (type.match(/keydown/)) e.preventDefault();
       actualButton.div.classList.add('active');
 
       if (code.match(/Control/)) this.isCtrl = true;
-      if (code.match(/Shift/)) this.isShift = true;
+      if (code.match(/Alt/)) this.isAlt = true;
 
-      if (code.match(/Control/) && this.isShift) this.languageChange();
-      if (code.match(/Shift/) && this.isCtrl) this.languageChange();
-    } else if (type.match(/keyup/)) {
+      if (code.match(/Control/) && this.isAlt) this.languageChange();
+      if (code.match(/Alt/) && this.isCtrl) this.languageChange();
+
+      if (code.match(/Shift/)) {
+        this.isShift = true;
+        this.lettersUp();
+      }
+
+      if (code.match(/CapsLock/)) {
+        this.isCapsLock = true;
+        if (this.capsLockCounter === 0) {
+          this.capsLockCounter += 1;
+          actualButton.div.classList.add('active');
+          this.lettersUp();
+        } else if (this.capsLockCounter === 1) {
+          this.capsLockCounter += 1;
+          actualButton.div.classList.remove('active');
+          this.capsLockCounter = 0;
+          this.isCapsLock = false;
+          this.lettersUp();
+        }
+      }
+    } else if (type.match(/keyup|mouseup/)) {
       actualButton.div.classList.remove('active');
       if (code.match(/Control/)) {
         this.counter = 1;
         this.isCtrl = false;
       }
-      if (code.match(/Shift/)) {
+      if (code.match(/Alt/)) {
         this.counter = 1;
+        this.isAlt = false;
+      }
+      if (code.match(/Shift/)) {
         this.isShift = false;
+        this.lettersUp();
+      }
+      if (code.match(/CapsLock/)) {
+        if (this.capsLockCounter === 1) {
+          actualButton.div.classList.add('active');
+        } else if (this.capsLockCounter === 2) {
+          this.isCapsLock = false;
+          actualButton.div.classList.remove('active');
+          this.lettersUp();
+        }
       }
     }
   };
@@ -132,5 +168,59 @@ export default class Keyboard {
       e.up = newLangButton.up;
       e.extra.innerHTML = newLangButton.up;
     });
+  };
+
+  lettersUp = () => {
+    if (this.isShift) {
+      if (!this.isCapsLock) {
+        this.keyButtons.forEach((e) => {
+          if (!e.isFnKey) {
+            e.extra.classList.remove('hidden');
+            e.letter.classList.add('hidden');
+          }
+        });
+      } else if (this.isCapsLock) {
+        this.keyButtons.forEach((e) => {
+          if (!e.isFnKey && e.low.match(/[a-zа-я]/)) {
+            e.extra.classList.add('hidden');
+            e.letter.classList.remove('hidden');
+          }
+          if (!e.isFnKey && !e.low.match(/[a-zа-я]/)) {
+            e.extra.classList.remove('hidden');
+            e.letter.classList.add('hidden');
+          }
+        });
+      }
+    } else if (!this.isShift) {
+      if (!this.isCapsLock) {
+        this.keyButtons.forEach((e) => {
+          if (!e.isFnKey) {
+            e.extra.classList.add('hidden');
+            e.letter.classList.remove('hidden');
+          }
+        });
+      } else if (this.isCapsLock) {
+        if (this.capsLockCounter === 1) {
+          this.keyButtons.forEach((e) => {
+            if (!e.isFnKey && e.low.match(/[a-zа-я]/)) {
+              e.extra.classList.remove('hidden');
+              e.letter.classList.add('hidden');
+            }
+            if (!e.isFnKey && !e.low.match(/[a-zа-я]/)) {
+              e.extra.classList.add('hidden');
+              e.letter.classList.remove('hidden');
+            }
+          });
+        } else if (this.capsLockCounter === 2) {
+          this.keyButtons.forEach((e) => {
+            if (!e.isFnKey && e.low.match(/[a-zа-я]/)) {
+              e.extra.classList.add('hidden');
+              e.letter.classList.remove('hidden');
+              this.capsLockCounter = 0;
+            }
+          });
+        }
+      }
+    }
   };
 }

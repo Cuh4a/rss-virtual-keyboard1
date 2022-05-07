@@ -7,7 +7,7 @@ export default class Key {
     this.up = up;
     this.isFnKey = Boolean(
       code.match(
-        /Tab|CapsLock|Shift|Control|MetaLeft|Alt|Backspace|Del|Enter|arr|Space/,
+        /Tab|CapsLock|Shift|Control|MetaLeft|Alt|Backspace|Del|Enter|Arrow|Space/,
       ),
     );
     this.extra = create('div', 'extra hidden', this.up);
