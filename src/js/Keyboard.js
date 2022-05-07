@@ -178,11 +178,13 @@ export default class Keyboard {
       this.container.dataset.language = 'ru';
       storage.set('lang', this.container.dataset.language);
       this.buttonsAll = language.ru;
+      this.lettersUp();
     } else if (this.container.dataset.language === 'ru' && this.counter === 1) {
       this.counter += 1;
       this.container.dataset.language = 'en';
       storage.set('lang', this.container.dataset.language);
       this.buttonsAll = language.en;
+      this.lettersUp();
     }
     this.keyButtons.forEach((e) => {
       const newLangButton = this.buttonsAll.find((key) => key.code === e.code);
@@ -190,6 +192,7 @@ export default class Keyboard {
       e.letter.innerHTML = newLangButton.low;
       e.up = newLangButton.up;
       e.extra.innerHTML = newLangButton.up;
+      this.lettersUp();
     });
   };
 
@@ -204,11 +207,11 @@ export default class Keyboard {
         });
       } else if (this.isCapsLock) {
         this.keyButtons.forEach((e) => {
-          if (!e.isFnKey && e.low.match(/[a-zа-я]/)) {
+          if (!e.isFnKey && e.low.match(/[a-zа-я]|ё/)) {
             e.extra.classList.add('hidden');
             e.letter.classList.remove('hidden');
           }
-          if (!e.isFnKey && !e.low.match(/[a-zа-я]/)) {
+          if (!e.isFnKey && !e.low.match(/[a-zа-я]|ё/)) {
             e.extra.classList.remove('hidden');
             e.letter.classList.add('hidden');
           }
@@ -225,18 +228,18 @@ export default class Keyboard {
       } else if (this.isCapsLock) {
         if (this.capsLockCounter === 1) {
           this.keyButtons.forEach((e) => {
-            if (!e.isFnKey && e.low.match(/[a-zа-я]/)) {
+            if (!e.isFnKey && e.low.match(/[a-zа-я]|ё/)) {
               e.extra.classList.remove('hidden');
               e.letter.classList.add('hidden');
             }
-            if (!e.isFnKey && !e.low.match(/[a-zа-я]/)) {
+            if (!e.isFnKey && !e.low.match(/[a-zа-я]|ё/)) {
               e.extra.classList.add('hidden');
               e.letter.classList.remove('hidden');
             }
           });
         } else if (this.capsLockCounter === 2) {
           this.keyButtons.forEach((e) => {
-            if (!e.isFnKey && e.low.match(/[a-zа-я]/)) {
+            if (!e.isFnKey && e.low.match(/[a-zа-я]|ё/)) {
               e.extra.classList.add('hidden');
               e.letter.classList.remove('hidden');
               this.capsLockCounter = 0;
