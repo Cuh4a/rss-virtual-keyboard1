@@ -11,7 +11,6 @@ export default function create(el, names, child, parent, ...dataAtr) {
   if (child && Array.isArray(child)) {
     child.forEach((e) => e && element.append(e));
   } else if (
-    // eslint-disable-next-line operator-linebreak
     (child && typeof child === 'object') ||
     (child && typeof child === 'string')
   ) {
