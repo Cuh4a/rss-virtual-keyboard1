@@ -208,3 +208,23 @@ body {
     font-family: 'Press Start 2P', sans-serif;
     font-size: 11px;
 }
+
+.mute {
+    width: 30px;
+    height: 30px;
+    filter: invert(1);
+    align-self: flex-start;
+    margin: 0 0 10px 60px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.sounded {
+    background: no-repeat url('../assets/volume.png');
+    background-size: 30px;
+}
+
+.muted {
+    background: no-repeat url('../assets/mute.png');
+    background-size: 30px;
+}

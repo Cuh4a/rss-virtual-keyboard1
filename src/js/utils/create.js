@@ -29,7 +29,7 @@ export default function create(el, names, child, parent, ...dataAtr) {
       }
       if (
         atrKey.match(
-          /value|id|placeholder|cols|rows|autocorrect|spellcheck|autofocus/,
+          /value|id|placeholder|cols|rows|autocorrect|spellcheck|autofocus|resize/,
         )
       ) {
         element.setAttribute(atrKey, atrValue);

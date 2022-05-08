@@ -2,16 +2,19 @@ import create from './utils/create';
 import language from './languages/lang';
 import Key from './Key';
 import * as storage from './localStorage';
+import sound from '../assets/click.wav';
 
 const main = create('main', 'main');
 const wrapper = create('div', 'wrapper', [
   create('h1', 'title', 'Virtual Keyboard'),
 ]);
+const mute = create('button', 'mute sounded');
+wrapper.append(mute);
+let isPlaying = true;
 
 export default class Keyboard {
   constructor(rows) {
     this.rows = rows;
-    this.pressed = {};
   }
 
   init(lang) {
@@ -50,6 +53,7 @@ export default class Keyboard {
     this.counter = 1;
     this.capsLockCounter = 0;
     this.keyButtons = [];
+    this.shiftCounter = 0;
     this.rows.forEach((element, index) => {
       const rowButton = create('div', 'row-button', null, this.container, [
         'number',
@@ -84,6 +88,7 @@ export default class Keyboard {
     document.onkeyup = this.handle;
     this.container.onmousedown = this.mouseHandle;
     this.container.onmouseup = this.mouseHandle;
+    mute.onclick = this.stopSound;
   }
 
   mouseHandle = (e) => {
@@ -109,12 +114,14 @@ export default class Keyboard {
 
   handle = (e) => {
     const { code, type } = e;
+    this.codeH = code;
     if (e.stopPropagation) e.stopPropagation();
     const actualButton = this.keyButtons.find((key) => key.code === code);
     this.text.focus();
     if (actualButton === undefined) {
       return;
     }
+    this.playSound();
     if (type.match(/keydown|mousedown/)) {
       if (type.match(/keydown/)) e.preventDefault();
       actualButton.div.classList.add('active');
@@ -179,6 +186,7 @@ export default class Keyboard {
       }
       if (code.match(/Shift/)) {
         this.isShift = false;
+        this.shiftCounter = 0;
         this.lettersUp();
       }
       if (code.match(/CapsLock/)) {
@@ -190,6 +198,29 @@ export default class Keyboard {
           this.lettersUp();
         }
       }
+    }
+  };
+
+  playSound = () => {
+    this.click = new Audio(sound);
+    this.click.volume = 0.4;
+    if (isPlaying) {
+      if (this.codeH.match(/Shift/) && this.shiftCounter === 0) {
+        this.click.play();
+        this.shiftCounter = +1;
+      } else if (!this.codeH.match(/Shift/)) this.click.play();
+    }
+  };
+
+  stopSound = () => {
+    if (this.keyButtons && isPlaying) {
+      isPlaying = false;
+      mute.classList.remove('sounded');
+      mute.classList.add('muted');
+    } else if (this.keyButtons && !isPlaying) {
+      isPlaying = true;
+      mute.classList.add('sounded');
+      mute.classList.remove('muted');
     }
   };
 
